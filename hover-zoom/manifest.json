@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Image Hover Zoom",
+  "version": "0.1",
+  "description": "Zooms images on hover.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
