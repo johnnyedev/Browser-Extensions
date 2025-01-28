@@ -1,15 +1,15 @@
-//chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//  if (request.action === 'toggleExtension') {
-//    if (request.isActive) {
+chrome.storage.local.get(['enabled'], function (result) {
+  if (result.enabled) {
+    if (!window.contentScriptEnabled) {
+      window.contentScriptEnabled = true;
+      // End of Wrapper
 
-//console.log(scriptStatus);
-
-if (scriptStatus = 'Enabled') {
-
-console.log(scriptStatus);
+      // content script starts
+      console.log('Content script enabled');
 
 document.addEventListener('mouseover', (event) => {
   const img = event.target;
+
   if (img.tagName === 'IMG') {
     zoomedImg = new Image();
 
@@ -26,6 +26,7 @@ document.addEventListener('mouseover', (event) => {
       src = bestSrc[1];
       console.log(src);
     };
+
 
     zoomedImg.src = src;
     zoomedImg.style.position = 'absolute';
@@ -72,13 +73,13 @@ document.addEventListener('mouseover', (event) => {
 
  }
 });
-// Start ending of our code that allows enable/disabling of script
-      console.log("Content script enabled");
+
+
+// start end of wrapper
     } else {
-      
-      console.log("Content script disabled");
-    };
-
-scriptStatus = 'Disabled';
-//}});
-
+      console.log('Content script already enabled');
+    }
+  } else {
+    console.log('Content script is disabled');
+  }
+});
