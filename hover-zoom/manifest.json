@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Image Hover Zoom",
-  "version": "0.6",
+  "version": "0.7",
   "description": "Zooms images on hover.",
+  "background": {    "service_worker": "background.js"  },
+  "action": {    "default_popup": "popup.html"   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
