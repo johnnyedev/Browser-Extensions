@@ -1,12 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   const toggleButton = document.getElementById('toggleButton');
-  let extensionActive = false;
 
-  toggleButton.addEventListener('click', () => {
-    extensionActive = !extensionActive;
-    toggleButton.textContent = extensionActive ? 'Disable Extension' : 'Enable Extension';
+  // Set default state to disabled if not already set
+  chrome.storage.local.get(['enabled'], function (result) {
+    if (result.enabled === undefined) {
+      chrome.storage.local.set({ enabled: false });
+      toggleButton.textContent = 'Enable Content Script';
+    } else {
+      toggleButton.textContent = result.enabled ? 'Disable Content Script' : 'Enable Content Script';
+    }
+  });
 
-    // Send a message to the background script to toggle the functionality
-    chrome.runtime.sendMessage({ action: 'toggleExtension', isActive: extensionActive });
+  toggleButton.addEventListener('click', function () {
+    chrome.storage.local.get(['enabled'], function (result) {
+      const newState = !result.enabled;
+      chrome.storage.local.set({ enabled: newState }, function () {
+        toggleButton.textContent = newState ? 'Disable Content Script' : 'Enable Content Script';
+        
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          const activeTab = tabs[0];
+          chrome.runtime.sendMessage({ enabled: newState, tabId: activeTab.id });
+        });
+      });
+    });
   });
 });
