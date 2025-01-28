@@ -6,26 +6,29 @@ document.addEventListener('mouseover', (event) => {
     zoomedImg.style.position = 'absolute';
     zoomedImg.style.zIndex = 9999;
 
-    // Calculate the available space for the zoomed image
+    // Calculate available space, prioritizing width
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const imgWidth = img.naturalWidth;
     const imgHeight = img.naturalHeight;
 
-    // Calculate the maximum width and height that can fit within the viewport
-    let maxWidth = viewportWidth - event.clientX - 10;
-    let maxHeight = viewportHeight - event.clientY - 10;
+    // Calculate maximum width that fits within the viewport
+//    const maxWidth = Math.min(viewportWidth - event.clientX - 10, 800);
+    const minWidth = 800; // Set your desired minimum width
+    const maxWidth = Math.min(viewportWidth - event.clientX - 10, 800, minWidth);
 
-    // Adjust the width and height to fit the available space
-    if (imgWidth > maxWidth) {
-      zoomedImg.style.width = maxWidth + 'px';
-      zoomedImg.style.height = (maxHeight * imgHeight / imgWidth) + 'px';
-    } else {
-      zoomedImg.style.width = imgWidth + 'px';
-      zoomedImg.style.height = imgHeight + 'px';
-    }
 
-    // Position the zoomed image relative to the mouse cursor
+    // Calculate the corresponding height based on aspect ratio
+    const maxHeight = maxWidth * imgHeight / imgWidth;
+
+    // Adjust height if it exceeds viewport height
+//    if (maxHeight > viewportHeight - event.clientY - 10) {
+//      maxHeight = viewportHeight - event.clientY - 10;
+//     maxWidth = maxHeight * imgWidth / imgHeight;
+//    }
+
+    zoomedImg.style.width = maxWidth + 'px';
+    zoomedImg.style.height = maxHeight + 'px';
     zoomedImg.style.left = event.clientX + 10 + 'px';
     zoomedImg.style.top = event.clientY + 10 + 'px';
 
