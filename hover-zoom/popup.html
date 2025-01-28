@@ -3,8 +3,33 @@
 <head>
   <title>Toggle Content Script</title>
   <script src="popup.js"></script>
+  <style>
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .list-item input {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    .list-item button {
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body>
   <button id="toggleButton">Toggle Content Script</button>
+  <h3>Whitelist</h3>
+  <input type="text" id="whitelistInput" placeholder="Add domain/URI">
+  <button id="addWhitelist">Add to Whitelist</button>
+  <ul id="whitelist"></ul>
+  <button id="toggleWhitelist">Enable Whitelist</button>
+  
+  <h3>Blacklist</h3>
+  <input type="text" id="blacklistInput" placeholder="Add domain/URI">
+  <button id="addBlacklist">Add to Blacklist</button>
+  <ul id="blacklist"></ul>
+  <button id="toggleBlacklist">Enable Blacklist</button>
 </body>
 </html>
