@@ -2,9 +2,10 @@ chrome.storage.local.get(['enabled'], function (result) {
   if (result.enabled) {
     if (!window.contentScriptEnabled) {
       window.contentScriptEnabled = true;
-      // End of Wrapper
 
-      // content script starts
+      // End beginning of wrapper
+
+      // content script starts here
       console.log('Content script enabled');
 
 document.addEventListener('mouseover', (event) => {
@@ -76,6 +77,7 @@ document.addEventListener('mouseover', (event) => {
 
 
 // start end of wrapper
+
     } else {
       console.log('Content script already enabled');
     }
