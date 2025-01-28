@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Image Hover Zoom",
-  "version": "0.5",
+  "version": "0.6",
   "description": "Zooms images on hover.",
   "content_scripts": [
     {
