@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Image Hover Zoom",
-  "version": "0.8",
+  "version": "0.9",
   "description": "When the mouse hovers over IMG element an enlarged version of the image is displayed",
   "permissions": ["storage", "activeTab", "tabs", "scripting"],
   "host_permissions": ["<all_urls>"],
